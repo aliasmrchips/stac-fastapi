@@ -6,21 +6,21 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Arturo's STAC compliant API implementation.">
+        <meta name="description" content="STAC FastAPI.">
       
       
       
       
-      <link rel="shortcut icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.6">
     
     
       
-        <title>arturo-stac-api</title>
+        <title>stac-fastapi</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.1655a90d.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.2c0c5eaf.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.7fa14f5b.min.css">
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#usage" class="md-skip">
+        <a href="#local-development" class="md-skip">
           Skip to content
         </a>
       
@@ -71,11 +71,9 @@
       
     </div>
     
-      
-
-<header class="md-header" data-md-component="header">
+      <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="arturo-stac-api" class="md-header__button md-logo" aria-label="arturo-stac-api">
+    <a href="." title="stac-fastapi" class="md-header__button md-logo" aria-label="stac-fastapi" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/></svg>
@@ -88,7 +86,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            arturo-stac-api
+            stac-fastapi
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -137,13 +135,13 @@
     
       <div class="md-header__source">
         
-<a href="https://github.com/stac-utils/arturo-stac-api/" title="Go to repository" class="md-source" data-md-component="source">
+<a href="https://github.com/stac-utils/stac-fastapi/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    stac-utils/arturo-stac-api
+    stac-utils/stac-fastapi
   </div>
 </a>
       </div>
@@ -167,28 +165,26 @@
                     
 
 
-
-
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="arturo-stac-api" class="md-nav__button md-logo" aria-label="arturo-stac-api">
+    <a href="." title="stac-fastapi" class="md-nav__button md-logo" aria-label="stac-fastapi" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/></svg>
 
     </a>
-    arturo-stac-api
+    stac-fastapi
   </label>
   
     <div class="md-nav__source">
       
-<a href="https://github.com/stac-utils/arturo-stac-api/" title="Go to repository" class="md-source" data-md-component="source">
+<a href="https://github.com/stac-utils/stac-fastapi/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    stac-utils/arturo-stac-api
+    stac-utils/stac-fastapi
   </div>
 </a>
     </div>
@@ -228,20 +224,6 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-structure" class="md-nav__link">
-    Project Structure
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#local-development" class="md-nav__link">
@@ -299,8 +281,53 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      <label class="md-nav__link" for="__nav_2_1">
+        stac_fastapi.api
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="stac_fastapi.api" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          stac_fastapi.api
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
     <li class="md-nav__item">
-      <a href="api/stac_api/errors/" class="md-nav__link">
+      <a href="api/stac_fastapi/api/app/" class="md-nav__link">
+        app
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/api/config/" class="md-nav__link">
+        config
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/api/errors/" class="md-nav__link">
         errors
       </a>
     </li>
@@ -312,9 +339,216 @@
   
   
     <li class="md-nav__item">
-      <a href="api/stac_api/config/" class="md-nav__link">
-        config
+      <a href="api/stac_fastapi/api/middleware/" class="md-nav__link">
+        middleware
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/api/models/" class="md-nav__link">
+        models
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/api/openapi/" class="md-nav__link">
+        openapi
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/api/routes/" class="md-nav__link">
+        routes
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
+        stac_fastapi.extensions
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="stac_fastapi.extensions" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          stac_fastapi.extensions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      <label class="md-nav__link" for="__nav_2_2_1">
+        core
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="core" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          core
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/extensions/core/context/" class="md-nav__link">
+        context
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/extensions/core/fields/" class="md-nav__link">
+        fields
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/extensions/core/query/" class="md-nav__link">
+        query
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/extensions/core/sort/" class="md-nav__link">
+        sort
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/extensions/core/transaction/" class="md-nav__link">
+        transaction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2_2">
+        third_party
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="third_party" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          third_party
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/extensions/third_party/bulk_transactions/" class="md-nav__link">
+        bulk_transactions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/extensions/third_party/tiles/" class="md-nav__link">
+        tiles
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -330,13 +564,13 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
       
       <label class="md-nav__link" for="__nav_2_3">
-        models
+        stac_fastapi.server
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="models" data-md-level="2">
+      <nav class="md-nav" aria-label="stac_fastapi.server" data-md-level="2">
         <label class="md-nav__title" for="__nav_2_3">
           <span class="md-nav__icon md-icon"></span>
-          models
+          stac_fastapi.server
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -345,56 +579,8 @@
   
   
     <li class="md-nav__item">
-      <a href="api/stac_api/models/database/" class="md-nav__link">
-        database
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="api/stac_api/models/decompose/" class="md-nav__link">
-        decompose
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="api/stac_api/models/links/" class="md-nav__link">
-        links
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="api/stac_api/models/ogc/" class="md-nav__link">
-        ogc
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="api/stac_api/models/schemas/" class="md-nav__link">
-        schemas
+      <a href="api/stac_fastapi/server/app/" class="md-nav__link">
+        app
       </a>
     </li>
   
@@ -417,13 +603,34 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
       
       <label class="md-nav__link" for="__nav_2_4">
-        api
+        stac_fastapi.sqlalchemy
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="api" data-md-level="2">
+      <nav class="md-nav" aria-label="stac_fastapi.sqlalchemy" data-md-level="2">
         <label class="md-nav__title" for="__nav_2_4">
           <span class="md-nav__icon md-icon"></span>
-          api
+          stac_fastapi.sqlalchemy
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4_1" type="checkbox" id="__nav_2_4_1" >
+      
+      <label class="md-nav__link" for="__nav_2_4_1">
+        models
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="models" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          models
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -432,8 +639,8 @@
   
   
     <li class="md-nav__item">
-      <a href="api/stac_api/api/routes/" class="md-nav__link">
-        routes
+      <a href="api/stac_fastapi/sqlalchemy/models/database/" class="md-nav__link">
+        database
       </a>
     </li>
   
@@ -444,8 +651,8 @@
   
   
     <li class="md-nav__item">
-      <a href="api/stac_api/api/models/" class="md-nav__link">
-        models
+      <a href="api/stac_fastapi/sqlalchemy/models/decompose/" class="md-nav__link">
+        decompose
       </a>
     </li>
   
@@ -456,8 +663,209 @@
   
   
     <li class="md-nav__item">
-      <a href="api/stac_api/api/app/" class="md-nav__link">
-        app
+      <a href="api/stac_fastapi/sqlalchemy/models/links/" class="md-nav__link">
+        links
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/sqlalchemy/models/schemas/" class="md-nav__link">
+        schemas
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/sqlalchemy/config/" class="md-nav__link">
+        config
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/sqlalchemy/core/" class="md-nav__link">
+        core
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/sqlalchemy/session/" class="md-nav__link">
+        session
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/sqlalchemy/tokens/" class="md-nav__link">
+        tokens
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/sqlalchemy/transactions/" class="md-nav__link">
+        transactions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/sqlalchemy/version/" class="md-nav__link">
+        version
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5" type="checkbox" id="__nav_2_5" >
+      
+      <label class="md-nav__link" for="__nav_2_5">
+        stac_fastapi.types
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="stac_fastapi.types" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          stac_fastapi.types
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/types/core/" class="md-nav__link">
+        core
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/types/config/" class="md-nav__link">
+        config
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/types/errors/" class="md-nav__link">
+        errors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/types/extension/" class="md-nav__link">
+        extension
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/types/" class="md-nav__link">
+        index
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/types/search/" class="md-nav__link">
+        search
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/stac_fastapi/types/version/" class="md-nav__link">
+        version
       </a>
     </li>
   
@@ -528,20 +936,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-structure" class="md-nav__link">
-    Project Structure
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#local-development" class="md-nav__link">
     Local Development
   </a>
@@ -573,7 +967,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/stac-utils/arturo-stac-api/blob/master/docs/src/index.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/stac-utils/stac-fastapi/blob/master/docs/src/index.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -581,69 +975,30 @@
                   <h1>Home</h1>
                 
                 <p align="center">
-  <p align="center">Arturo's STAC compliant API implementation.</p>
-</p>
-
-<p align="center">
-  <a href="https://github.com/stac-utils/arturo-stac-api/actions?query=workflow%3Acicd" target="_blank">
-      <img src="https://github.com/stac-utils/arturo-stac-api/workflows/arturo-stac-api/badge.svg" alt="Test">
+  <a href="https://github.com/stac-utils/stac-fastapi/actions?query=workflow%3Acicd" target="_blank">
+      <img src="https://github.com/stac-utils/stac-fastapi/workflows/stac-fastapi/badge.svg" alt="Test">
   </a>
-  <a href="https://codecov.io/gh/stac-utils/arturo-stac-api" target="_blank">
-      <img src="https://codecov.io/gh/stac-utils/arturo-stac-api/branch/master/graph/badge.svg" alt="Coverage">
+  <a href="https://pypi.org/project/stac-fastapi" target="_blank">
+      <img src="https://img.shields.io/pypi/v/stac-fastapi?color=%2334D058&label=pypi%20package" alt="Package version">
   </a>
-  <a href="https://pypi.org/project/arturo-stac-api" target="_blank">
-      <img src="https://img.shields.io/pypi/v/arturo-stac-api?color=%2334D058&label=pypi%20package" alt="Package version">
-  </a>
-  <a href="https://github.com/stac-utils/arturo-stac-api/blob/master/LICENSE" target="_blank">
-      <img src="https://img.shields.io/github/license/stac-utils/arturo-stac-api.svg" alt="Downloads">
+  <a href="https://github.com/stac-utils/stac-fastapi/blob/master/LICENSE" target="_blank">
+      <img src="https://img.shields.io/github/license/stac-utils/stac-fastapi.svg" alt="Downloads">
   </a>
 </p>
 
 <hr />
+<p><strong>Documentation</strong>: <a href="https://stac-utils.github.io/stac-fastapi/">https://stac-utils.github.io/stac-fastapi/</a></p>
+<p><strong>Source Code</strong>: <a class="magiclink magiclink-github magiclink-repository" href="https://github.com/stac-utils/stac-fastapi" title="GitHub Repository: stac-utils/stac-fastapi">stac-utils/stac-fastapi</a></p>
 <hr />
-<p><strong>Documentation</strong>: <a href="https://stac-utils.github.io/arturo-stac-api/">https://stac-utils.github.io/arturo-stac-api/</a></p>
-<p><strong>Source Code</strong>: <a class="magiclink magiclink-github magiclink-repository" href="https://github.com/stac-utils/arturo-stac-api" title="GitHub Repository: stac-utils/arturo-stac-api">stac-utils/arturo-stac-api</a></p>
-<hr />
-<p>Python library for building a STAC compliant FastAPI application.  It provides:
-- An API layer which enforces the <a href="https://github.com/radiantearth/stac-api-spec">stac-api spec</a> and allows users
-to customize how the API interacts with their data through dependency injection.
-- A PostGIS implementation using <a href="https://github.com/sqlalchemy/sqlalchemy">sqlalchemy</a>/<a href="https://geoalchemy-2.readthedocs.io/en/latest/">geoalchemy2</a>.</p>
+<p>Python library for building a STAC compliant FastAPI application.  The project is split up into several namespace
+packages:
+- <strong>stac_fastapi.api</strong>: An API layer which enforces the <a href="https://github.com/radiantearth/stac-api-spec">stac-api-spec</a>.
+- <strong>stac_fastapi.extensions</strong>: Abstract base classes for <a href="https://github.com/radiantearth/stac-api-spec/blob/master/extensions.md">STAC API extensions</a> and third-party extensions.
+- <strong>stac_fastapi.server</strong>: Standalone FastAPI server for the application.
+- <strong>stac_fastapi.sqlalchemy</strong>: Postgres backend implementation with sqlalchemy.
+- <strong>stac_fastapi.types</strong>: Shared types and abstract base classes used by the library.</p>
 <p>Initially developed by <a href="https://github.com/arturo-ai">arturo-ai</a>.</p>
-<div class="highlight"><pre><span></span><code>pip install arturo-stac-api
-</code></pre></div>
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">stac_api.api.app</span> <span class="kn">import</span> <span class="n">StacApi</span>
-<span class="kn">from</span> <span class="nn">stac_api.clients.postgres.core</span> <span class="kn">import</span> <span class="n">CoreCrudClient</span>
-<span class="kn">from</span> <span class="nn">stac_api.clients.postgres.session</span> <span class="kn">import</span> <span class="n">Session</span>
-<span class="kn">from</span> <span class="nn">stac_api.config</span> <span class="kn">import</span> <span class="n">ApiSettings</span>
-
-<span class="n">settings</span> <span class="o">=</span> <span class="n">ApiSettings</span><span class="p">()</span>
-<span class="n">api</span> <span class="o">=</span> <span class="n">StacApi</span><span class="p">(</span>
-    <span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">,</span>
-    <span class="n">client</span><span class="o">=</span><span class="n">CoreCrudClient</span><span class="p">(</span>
-        <span class="n">session</span><span class="o">=</span><span class="n">Session</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">reader_connection_string</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">writer_connection_string</span><span class="p">)</span>
-    <span class="p">),</span>
-<span class="p">)</span>
-
-<span class="c1"># FastAPI application</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">app</span>
-</code></pre></div>
-<h2 id="project-structure">Project Structure<a class="headerlink" href="#project-structure" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>.
-├── alembic             # Database migrations
-│   └── versions        # Migration versions
-├── scripts             # Scripts for local development
-├── stac_api
-│   ├── api             # API layer
-│   ├── clients
-│   │   ├── postgres    # Postgres CRUD client
-│   │   └── tiles       # OGC Tiles API client
-│   ├── models          # Pydantic and ORM models
-│   └── utils           # Helper functions
-└── tests
-    ├── api             # Test api creation
-    ├── clients         # Test application logic
-    └── resources       # Test api endpoints
+<div class="highlight"><pre><span></span><code>pip install stac-fastapi
 </code></pre></div>
 <h2 id="local-development">Local Development<a class="headerlink" href="#local-development" title="Permanent link">&para;</a></h2>
 <p>Use docker-compose to deploy the application, migrate the database, and ingest some example data:
@@ -679,13 +1034,13 @@ $ pytest -v
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
       
-        <a href="api/stac_api/errors/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="api/stac_fastapi/api/app/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              errors
+              app
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -703,6 +1058,7 @@ $ pytest -v
         <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs
         </a>
+        
       </div>
       
   <div class="md-footer-social">
@@ -729,7 +1085,7 @@ $ pytest -v
     <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.ca5457b8.min.js"></script>
+      <script src="assets/javascripts/bundle.a1c7c35e.min.js"></script>
       
     
   </body>
