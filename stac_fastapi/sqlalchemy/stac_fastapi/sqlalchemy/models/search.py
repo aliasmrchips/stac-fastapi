@@ -40,3 +40,6 @@ class QueryableTypes:
     utm_zone = sa.Integer
     data_coverage = sa.Float
     cloud_cover = sa.Float
+    placetype = sa.Text
+    placename = sa.Text
+    
