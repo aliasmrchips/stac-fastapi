@@ -85,6 +85,8 @@ class Queryables(str, AutoValueEnum):
     utm_zone = "sentinel:utm_zone"
     data_coverage = "sentinel:data_coverage"
     cloud_cover = "eo:cloud_cover"
+    placetype = "io:placetype"
+    placename = "io:placename"
 
 
 @dataclass
@@ -122,7 +124,9 @@ class QueryableTypes:
     utm_zone = sa.Integer
     data_coverage = sa.Float
     cloud_cover = sa.Float
-
+    placetype = sa.Text
+    placename = sa.Text
+    
 
 class FieldsExtension(FieldsBase):
     """FieldsExtension.
